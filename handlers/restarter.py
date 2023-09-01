@@ -8,10 +8,7 @@ from main import SUDO_USERS
 
 
 async def restart(message: Message, restart_type):
-    if restart_type == "update":
-        text = "1"
-    else:
-        text = "2"
+    text = "1" if restart_type == "update" else "2"
     try:
         await os.execvp(
             "python3",
@@ -68,7 +65,7 @@ async def update(client: Client, message: Message):
         await message.edit('**Userbot succesfully updated\nRestarting...**')
         await restart(message, restart_type="update")
     except:
-        await message.edit(f"**An error occured...**")
+        await message.edit("**An error occured...**")
 
 
 

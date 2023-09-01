@@ -13,7 +13,7 @@ async def join(client: Client, message: Message):
         return await message.reply_text("Can't join a chat with chat id. Give username or invite link.")
     try:
         await client.join_chat(zaid)
-        await message.reply_text(f"**Joined**")
+        await message.reply_text("**Joined**")
     except Exception as ex:
         await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
 
@@ -27,7 +27,7 @@ async def leave(client: Client, message: Message):
         return await message.reply_text("Can't leave a chat with chat id. Give username or invite link.")
     try:
         await client.leave_chat(zaid)
-        await message.reply_text(f"**Lefted**")
+        await message.reply_text("**Lefted**")
     except Exception as ex:
         await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
 

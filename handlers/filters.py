@@ -36,9 +36,7 @@ async def show_filters(client: Client, message):
     if poppy is False:
         await pablo.edit("**No Filters Found In This Chat...**")
         return
-    kk = ""
-    for Escobar in poppy:
-        kk += f"\n ◍ `{Escobar.get('keyword')}`"
+    kk = "".join(f"\n ◍ `{Escobar.get('keyword')}`" for Escobar in poppy)
     X = await client.get_chat(int(message.chat.id))
     grp_nme = X.title
     mag = f"List Of Filters In {grp_nme}: \n{kk}"
@@ -68,7 +66,6 @@ async def s_filters(app: Client, message):
 )
 async def filter_s(client: Client, message):
     owo = message.text
-    al_fill = []
     is_m = False
     if not owo:
         return
@@ -83,15 +80,14 @@ async def filter_s(client: Client, message):
             return
         try:
             await message.chat.ban_member(user)
-            await message.reply_text(f"👮🏼 **Gbanned** user detected.")
+            await message.reply_text("👮🏼 **Gbanned** user detected.")
         except ChatAdminRequired:
             print(f"can't remove gbanned user from chat: {message.chat.id}")
             return
     al_fil = await all_filters(int(message.chat.id))
     if not al_fil:
         return
-    for all_fil in al_fil:
-        al_fill.append(all_fil.get("keyword"))
+    al_fill = [all_fil.get("keyword") for all_fil in al_fil]
     owoo = owo.lower()
     for filter_s in al_fill:
         pattern = r"( |^|[^\w])" + re.escape(filter_s) + r"( |$|[^\w])"
@@ -129,18 +125,18 @@ async def filter_s(client: Client, message):
 
 
 async def is_media(message):
-    if not (
-        message.photo
-        or message.video
-        or message.document
-        or message.audio
-        or message.sticker
-        or message.animation
-        or message.voice
-        or message.video_note
-    ):
-        return False
-    return True
+    return bool(
+        (
+            message.photo
+            or message.video
+            or message.document
+            or message.audio
+            or message.sticker
+            or message.animation
+            or message.voice
+            or message.video_note
+        )
+    )
 
 
 @Client.on_message(filters.command("stopall", ["."]) & filters.me)

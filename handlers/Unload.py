@@ -29,16 +29,13 @@ async def loadmod(client: Client, message: Message):
         await message.edit("<b>Load module...</b>")
         link = message.command[1]
         wget.download(link, 'handlers/')
-        await message.edit(
-            f"<b>**The module has been loaded successfully.**\nRestart..."
-        )
-        await restart(message, restart_type="restart")
     else:
         await client.download_media(message.reply_to_message.document, file_name='plugins/')
-        await message.edit(
-            f"<b>**The module has been loaded successfully.**\nRestart..."
-        )
-        await restart(message, restart_type="restart")
+
+    await message.edit(
+        f"<b>**The module has been loaded successfully.**\nRestart..."
+    )
+    await restart(message, restart_type="restart")
 
 
 add_command_help(

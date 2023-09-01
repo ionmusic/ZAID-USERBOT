@@ -19,19 +19,18 @@ def get_text(message: Message) -> [None, str]:
     text_to_return = message.text
     if message.text is None:
         return None
-    if " " in text_to_return:
-        try:
-            return message.text.split(None, 1)[1]
-        except IndexError:
-            return None
-    else:
+    if " " not in text_to_return:
+        return None
+    try:
+        return message.text.split(None, 1)[1]
+    except IndexError:
         return None
 
 
 @Client.on_message(filters.command("song", ".") & filters.me)
 async def song(client: Client, message: Message):
     input_str = get_text(message)
-    rep= await message.edit_text(f"`Processing...`")
+    rep = await message.edit_text("`Processing...`")
     if not input_str:
         await rep.edit(
             "`Please Give Me A Valid Input. You Can Check Help Menu To Know More!`"
@@ -109,13 +108,13 @@ async def savnana(client: Client, message: Message):
     img = k["image"]
     duration = k["duration"]
     singers = k["singers"]
-    urlretrieve(urrl, title + ".mp3")
-    urlretrieve(img, title + ".jpg")
+    urlretrieve(urrl, f"{title}.mp3")
+    urlretrieve(img, f"{title}.jpg")
     file= wget.download(urrl)
-    await client.send_audio(message.chat.id,file,caption=f"Song from saavan uploaded by king Userbot \n Song name={title}\n Singers={singers}" )   
+    await client.send_audio(message.chat.id,file,caption=f"Song from saavan uploaded by king Userbot \n Song name={title}\n Singers={singers}" )
     await lol.delete()
-    os.remove(title + ".mp3")
-    os.remove(title + ".jpg")
+    os.remove(f"{title}.mp3")
+    os.remove(f"{title}.jpg")
 
 
 @Client.on_message(filters.command("deezer", ".") & filters.me)

@@ -4,7 +4,7 @@ import time
 from pyrogram.types import ChatPermissions, Message
 from handlers.help import *
 
-@Client.on_message(filters.group & filters.command(["deleteuserhistory", "deletehistory"], ["."]) & filters.me)  
+@Client.on_message(filters.group & filters.command(["deleteuserhistory", "deletehistory"], ["."]) & filters.me)
 async def delete_user_history(client: Client, message: Message):
     chat_id=message.chat.id
     msg_id=message.message_id
@@ -12,9 +12,9 @@ async def delete_user_history(client: Client, message: Message):
     username=None
 
     if "@" in chat_msg:
-        index=chat_msg.index("@")     
+        index=chat_msg.index("@")
         chat_msg=str(chat_msg)
-        username=chat_msg[index+1:len(chat_msg)]
+        username = chat_msg[index+1:]
     else:                   
         username=message.reply_to_message.from_user.id
     zuzu= await client.get_chat_member(chat_id , "me")

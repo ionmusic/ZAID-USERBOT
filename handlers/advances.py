@@ -24,7 +24,7 @@ Zaid += f"➠ **ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ** : `{__version__}`\n"
 Zaid += f"➠ **ᴠᴇʀsɪᴏɴ**  : `{2.0}`\n"
 Zaid += f"➠ **ᴄʜᴀɴɴᴇʟ** : [❝𝐂𝐥𝐢𝐜𝐤❞](https://t.me/TheUpdatesChannel)\n"
 Zaid += f"━───────╮•╭───────━\n\n"
-Zaid += f"➠ **𒆜ʍǟӄɛ ʏօʊʀ օառ 𒆜:** [❝𝐂𝐥𝐢𝐜𝐤❞](https://gitHub.com/Itz-Zaid/Zaid-Userbot)"
+Zaid += "➠ **𒆜ʍǟӄɛ ʏօʊʀ օառ 𒆜:** [❝𝐂𝐥𝐢𝐜𝐤❞](https://gitHub.com/Itz-Zaid/Zaid-Userbot)"
 
 
 usage = f"** ❌ Wrong Usage ❌** \n Type `.help advanced`"
@@ -62,7 +62,7 @@ async def help(_, e: Message):
             await e.reply(help_menu)
 
 
-spam_help = f"""
+spam_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ Spam Cmds •**
 
@@ -99,7 +99,7 @@ syntax:
 """
 
 
-dm_help = f"""
+dm_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 ✘**• Dm Cmds •**
 
@@ -120,7 +120,7 @@ command:
 """
 
 
-join_help = f"""
+join_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ Join Cmds •**
 
@@ -130,7 +130,7 @@ join_help = f"""
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-leave_help = f"""
+leave_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ Leave Cmds •**
 
@@ -141,7 +141,7 @@ leave_help = f"""
 """
 
 
-cast_help = f"""
+cast_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ Broadcast Cmds •**
 ✘ **Broadcast**: To Broadcast a message Globally.
@@ -152,7 +152,7 @@ cast_help = f"""
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-invite_help = f"""
+invite_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ inviteall Cmds •**
 **Warning ⚠️:** inviting stuffs affect ur id do it own risk
@@ -166,7 +166,7 @@ Specially designed for inviting active members.
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-userbot_help = f"""
+userbot_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ Userbot Cmds •**
 
@@ -180,7 +180,7 @@ userbot_help = f"""
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-rraid_help = f"""
+rraid_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **✘ ReplyRaid Cmds •**
 
@@ -194,7 +194,7 @@ command:
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-owner_help = f"""
+owner_help = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 **Profile:** Profile And Other Cmds
 commands:
@@ -207,7 +207,7 @@ commands:
 ➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
-help_menu = f"""
+help_menu = """
 ➖➖➖➖➖➖➖➖➖➖➖➖
 ✘**There are following categories**
 
@@ -319,32 +319,32 @@ async def hello(client: Client, message: Message):
 
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["join"], [".", "!", "/"]))
 async def jhoin(client: Client, message: Message):
-    zaid = message.text[6:]
-    count = 0
-    if not zaid:
-        return await message.reply_text("Need a chat username or invite link to join.")
-    if zaid.isnumeric():
-        return await message.reply_text("Can't join a chat with chat id. Give username or invite link.")
-    try:
-        await client.join_chat(zaid)
-        await message.reply_text(f"**Joined**")
-    except Exception as ex:
-        await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
+        zaid = message.text[6:]
+        count = 0
+        if not zaid:
+            return await message.reply_text("Need a chat username or invite link to join.")
+        if zaid.isnumeric():
+            return await message.reply_text("Can't join a chat with chat id. Give username or invite link.")
+        try:
+                await client.join_chat(zaid)
+                await message.reply_text("**Joined**")
+        except Exception as ex:
+            await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
 
 
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["leave", "left"], [".", "!", "/"]))
 async def leasse(client: Client, message: Message):
-    zaid = message.text[6:]
-    count = 0
-    if not zaid:
-        return await message.reply_text("Need a chat username or invite link to leave.")
-    if zaid.isnumeric():
-        return await message.reply_text("Can't leave a chat with chat id. Give username or invite link.")
-    try:
-        await client.leave_chat(zaid)
-        await message.reply_text(f"**Lefted**")
-    except Exception as ex:
-        await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
+        zaid = message.text[6:]
+        count = 0
+        if not zaid:
+            return await message.reply_text("Need a chat username or invite link to leave.")
+        if zaid.isnumeric():
+            return await message.reply_text("Can't leave a chat with chat id. Give username or invite link.")
+        try:
+                await client.leave_chat(zaid)
+                await message.reply_text("**Lefted**")
+        except Exception as ex:
+            await message.reply_text(f"**ERROR:** \n\n{str(ex)}")
 
 
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["spam", "spamming"], [".", "!", "/"]))
@@ -377,61 +377,61 @@ async def skkkspam(client: Client, message: Message):
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["raid"], [".", "!", "/"]))
 @Client.on_message(filters.me & filters.command(["raid"], ["."]))
 async def raid(xspam: Client, e: Message):  
-      Zaid = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
-      if len(Zaid) == 2:
-          counts = int(Zaid[0])
-          if int(e.chat.id) in GROUP:
-               return await e.reply_text("**Sorry !! i Can't Spam Here.**")
-          ok = await xspam.get_users(Zaid[1])
-          id = ok.id
+        Zaid = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
+        if len(Zaid) == 2:
+                counts = int(Zaid[0])
+                if int(e.chat.id) in GROUP:
+                     return await e.reply_text("**Sorry !! i Can't Spam Here.**")
+                ok = await xspam.get_users(Zaid[1])
+                id = ok.id
 #          try:
 #              userz = await xspam.get_users(id)
 #          except:
 #              await e.reply(f"`404 : User Doesn't Exists In This Chat !`")
 #              return #remove # to enable this
-          if int(id) in VERIFIED_USERS:
-                text = f"Chal Chal baap Ko mat sikha"
-                await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
-                text = f"Abe Lawde that guy part of my devs."
-                await e.reply_text(text)
-          else:
-              fname = ok.first_name
-              mention = f"[{fname}](tg://user?id={id})"
-              for _ in range(counts):
-                    reply = choice(RAID)
-                    msg = f"{mention} {reply}"
-                    await xspam.send_message(e.chat.id, msg)
-                    await asyncio.sleep(0.10)
-      elif e.reply_to_message:
-          msg_id = e.reply_to_message.message_id
-          counts = int(Zaid[0])
-          if int(e.chat.id) in GROUP:
-               return await e.reply_text("**Sorry !! i Can't Spam Here.**")
-          user_id = e.reply_to_message.from_user.id
-          ok = await xspam.get_users(user_id)
-          id = ok.id
-          try:
-              userz = await xspam.get_users(id)
-          except:
-              await e.reply(f"`404 : User Doesn't Exists In This Chat !`")
-              return
-          if int(id) in VERIFIED_USERS:
-                text = f"Chal Chal baap Ko mat sikha"
-                await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
-                text = f"Abe Lawde that guy part of my devs."
-                await e.reply_text(text)
-          else:
-              fname = ok.first_name
-              mention = f"[{fname}](tg://user?id={id})"
-              for _ in range(counts):
-                    reply = choice(RAID)
-                    msg = f"{mention} {reply}"
-                    await xspam.send_message(e.chat.id, msg)
-                    await asyncio.sleep(0.10)
-      else:
-          await e.reply_text("Usage: .raid count username")
+                if int(id) in VERIFIED_USERS:
+                        text = "Chal Chal baap Ko mat sikha"
+                        await e.reply_text(text)
+                elif int(id) in SUDO_USERS:
+                        text = "Abe Lawde that guy part of my devs."
+                        await e.reply_text(text)
+                else:
+                        fname = ok.first_name
+                        mention = f"[{fname}](tg://user?id={id})"
+                        for _ in range(counts):
+                              reply = choice(RAID)
+                              msg = f"{mention} {reply}"
+                              await xspam.send_message(e.chat.id, msg)
+                              await asyncio.sleep(0.10)
+        elif e.reply_to_message:
+                msg_id = e.reply_to_message.message_id
+                counts = int(Zaid[0])
+                if int(e.chat.id) in GROUP:
+                     return await e.reply_text("**Sorry !! i Can't Spam Here.**")
+                user_id = e.reply_to_message.from_user.id
+                ok = await xspam.get_users(user_id)
+                id = ok.id
+                try:
+                        userz = await xspam.get_users(id)
+                except:
+                        await e.reply("`404 : User Doesn't Exists In This Chat !`")
+                        return
+                if int(id) in VERIFIED_USERS:
+                        text = "Chal Chal baap Ko mat sikha"
+                        await e.reply_text(text)
+                elif int(id) in SUDO_USERS:
+                        text = "Abe Lawde that guy part of my devs."
+                        await e.reply_text(text)
+                else:
+                        fname = ok.first_name
+                        mention = f"[{fname}](tg://user?id={id})"
+                        for _ in range(counts):
+                              reply = choice(RAID)
+                              msg = f"{mention} {reply}"
+                              await xspam.send_message(e.chat.id, msg)
+                              await asyncio.sleep(0.10)
+        else:
+                await e.reply_text("Usage: .raid count username")
 
 
 add_command_help(
@@ -460,43 +460,41 @@ from helpers.adminhelpers import CheckAdmin
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["replyraid", "rraid"], [".", "!"]))
 @Client.on_message(filters.command("replyraid", ["."]) & filters.me)
 async def gban(app: Client, message):
-    Zaid = await message.reply_text("**Processing**")
-    reply = message.reply_to_message
-    if reply:
-        user = reply.from_user["id"]
-    else:
-        user = get_arg(message)
-        if not user:
-            await Zaid.edit("**Whome should I replyraid?**")
+        Zaid = await message.reply_text("**Processing**")
+        if reply := message.reply_to_message:
+                user = reply.from_user["id"]
+        else:
+                user = get_arg(message)
+                if not user:
+                    await Zaid.edit("**Whome should I replyraid?**")
+                    return
+        get_user = await app.get_users(user)
+        mee= await app.get_me()
+        if get_user.id == mee.id:
+            await Zaid.edit("`Jaa Na Lawde Kahe Dimag Kha rha? Khudpe Raid kyu laga rha?`")
             return
-    get_user = await app.get_users(user)
-    mee= await app.get_me()
-    if get_user.id == mee.id:
-        await Zaid.edit("`Jaa Na Lawde Kahe Dimag Kha rha? Khudpe Raid kyu laga rha?`")
-        return
-    if int(get_user.id) in VERIFIED_USERS:
-        await Zaid.edit("Chal Chal baap Ko mat sikha")
-        return
-    elif int(get_user.id) in SUDO_USERS:
-        await Zaid.edit("Abe Lawde that guy part of my devs.")
-        return
-    await rraid_user(get_user.id)
-    await Zaid.edit(f"**Successfully Reply Raid Started {get_user.first_name}!**")
+        if int(get_user.id) in VERIFIED_USERS:
+            await Zaid.edit("Chal Chal baap Ko mat sikha")
+            return
+        elif int(get_user.id) in SUDO_USERS:
+            await Zaid.edit("Abe Lawde that guy part of my devs.")
+            return
+        await rraid_user(get_user.id)
+        await Zaid.edit(f"**Successfully Reply Raid Started {get_user.first_name}!**")
 
 @Client.on_message(filters.user(SUDO_USERS) & filters.command(["dreplyraid", "drraid"], [".", "!"]))
 @Client.on_message(filters.command("dreplyraid", ["."]) & filters.me)
 async def gbam(app: Client, message):
-    reply = message.reply_to_message
-    if reply:
-        user = reply.from_user["id"]
-    else:
-        user = get_arg(message)
-        if not user:
-            await message.reply_text("**Whome should I dreplyraid?**")
-            return
-    get_user = await app.get_users(user)
-    await unrraid_user(get_user.id)
-    await message.reply_text(f"**Reply Raid has Been Removed {get_user.first_name}, enjoy!**")
+        if reply := message.reply_to_message:
+                user = reply.from_user["id"]
+        else:
+                user = get_arg(message)
+                if not user:
+                    await message.reply_text("**Whome should I dreplyraid?**")
+                    return
+        get_user = await app.get_users(user)
+        await unrraid_user(get_user.id)
+        await message.reply_text(f"**Reply Raid has Been Removed {get_user.first_name}, enjoy!**")
 
 
 @Client.on_message(filters.group & filters.incoming)

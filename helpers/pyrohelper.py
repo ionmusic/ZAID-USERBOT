@@ -12,9 +12,7 @@ def get_arg(message):
     msg = message.text
     msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
     split = msg[1:].replace("\n", " \n").split(" ")
-    if " ".join(split[1:]).strip() == "":
-        return ""
-    return " ".join(split[1:])
+    return "" if not " ".join(split[1:]).strip() else " ".join(split[1:])
 
 
 def get_args(message):
@@ -37,10 +35,7 @@ def get_args(message):
 
 async def user_afk(filter, client: Client, message: Message):
     check = await get_afk_status()
-    if check:
-        return True
-    else:
-        return False
+    return bool(check)
 
 
 async def denied_users(filter, client: Client, message: Message):
@@ -54,7 +49,4 @@ async def denied_users(filter, client: Client, message: Message):
 
 async def welcome_chat(filter, client: Client, message: Message):
     to_welcome = await zaidm.get_welcome(str(message.chat.id))
-    if to_welcome:
-        return True
-    else:
-        return False
+    return bool(to_welcome)

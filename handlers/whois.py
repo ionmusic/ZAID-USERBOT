@@ -63,16 +63,19 @@ def LastOnline(user: User):
 
 
 async def GetCommon(bot: Client, get_user):
-    common = await bot.send(
+    return await bot.send(
         functions.messages.GetCommonChats(
             user_id=await bot.resolve_peer(get_user), max_id=0, limit=0
         )
     )
-    return common
 
 
 def FullName(user: User):
-    return user.first_name + " " + user.last_name if user.last_name else user.first_name
+    return (
+        f"{user.first_name} {user.last_name}"
+        if user.last_name
+        else user.first_name
+    )
 
 
 def ProfilePicUpdate(user_pic):
@@ -120,7 +123,7 @@ async def who_is(bot: Client, message: Message):
             ),
             disable_web_page_preview=True,
         )
-    elif user.photo:
+    else:
         await bot.send_photo(
             message.chat.id,
             user_pic[0].file_id,

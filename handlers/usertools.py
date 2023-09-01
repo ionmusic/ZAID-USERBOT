@@ -38,8 +38,7 @@ async def set_pfp(client: Client, message: Message):
 
 @Client.on_message(filters.me & filters.command(["vpfp"], ["."]))
 async def view_pfp(client: Client, message: Message):
-    replied = message.reply_to_message
-    if replied:
+    if replied := message.reply_to_message:
         user = await client.get_users(replied.from_user.id)
     else:
         user = await client.get_me()

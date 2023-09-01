@@ -22,10 +22,7 @@ async def del_filters(keyword, chat_id):
 
 async def filters_info(keyword, chat_id):
     r = await filter.find_one({"keyword": keyword, "chat_id": chat_id})
-    if r:
-        return r
-    else:
-        return False
+    return r if r else False
 
 
 async def filters_del(chat_id):
@@ -33,8 +30,7 @@ async def filters_del(chat_id):
 
 
 async def all_filters(chat_id):
-    r = [jo async for jo in filter.find({"chat_id": chat_id})]
-    if r:
+    if r := [jo async for jo in filter.find({"chat_id": chat_id})]:
         return r
     else:
         return False

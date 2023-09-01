@@ -17,13 +17,9 @@ async def CheckAdmin(app: Client, message: Message):
 
     if SELF.status not in ranks:
         await message.edit("__I'm not Admin!__")
-        sleep(2)
-        await message.delete()
-
+    elif SELF.status is not admin or SELF.can_restrict_members:
+        return True
     else:
-        if SELF.status is not admin or SELF.can_restrict_members:
-            return True
-        else:
-            await message.edit("__No Permissions to restrict Members__")
-            sleep(2)
-            await message.delete()
+        await message.edit("__No Permissions to restrict Members__")
+    sleep(2)
+    await message.delete()

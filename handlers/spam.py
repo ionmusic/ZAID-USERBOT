@@ -14,7 +14,7 @@ async def statspam(client: Client, message: Message):
     spam_text = ' '.join(message.command[2:])
     quantity = int(quantity)
     await message.delete()
-    for i in range(quantity):
+    for _ in range(quantity):
         await zaid.delete()
         msg = await client.send_message(message.chat.id, spam_text)
         await asyncio.sleep(0.1)
@@ -61,7 +61,7 @@ async def spam_stick(client: Client, message: Message):
         i=0
         times = message.command[1]
         if message.chat.type in ["supergroup", "group"]:
-            for i in range(int(times)):
+            for _ in range(int(times)):
                 sticker=message.reply_to_message.sticker.file_id
                 await client.send_sticker(
                     message.chat.id,
@@ -70,7 +70,7 @@ async def spam_stick(client: Client, message: Message):
                 await asyncio.sleep(0.10)
 
         if umm.chat.type == "private":
-            for i in range(int(times)):
+            for _ in range(int(times)):
                 sticker=message.reply_to_message.sticker.file_id
                 await client.send_sticker(
                     message.chat.id, sticker

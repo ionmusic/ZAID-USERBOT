@@ -147,18 +147,17 @@ async def fetch_all_fed(client: Client, message: Message):
             pass
         await asyncio.sleep(7)
         sed = (await client.get_history("@MissRose_bot", 1))[0]
-        if sed.media:
-            fed_file = await sed.download()
-            file = open(fed_file, "r")
-            lines = file.readlines()
-            for line in lines:
-                try:
-                    fed_list.append(line[:36])
-                except BaseException:
-                    pass
-            os.remove(fed_file)
-        else:
+        if not sed.media:
             return None
+        fed_file = await sed.download()
+        file = open(fed_file, "r")
+        lines = file.readlines()
+        for line in lines:
+            try:
+                fed_list.append(line[:36])
+            except BaseException:
+                pass
+        os.remove(fed_file)
     else:
         X = ok.text
         lol = X.splitlines()
@@ -173,8 +172,7 @@ async def fetch_all_fed(client: Client, message: Message):
                                 fed_list.append(lo[2:38])
         else:
             Y = X[44:].splitlines()
-            for lol in Y:
-               fed_list.append(lol[2:38])
+            fed_list.extend(lol[2:38] for lol in Y)
     return fed_list
 
 add_command_help(

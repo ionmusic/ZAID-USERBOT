@@ -17,13 +17,11 @@ async def save_note(note_name, note_id):
 
 async def get_note(note_name):
     result = await collection.find_one({"_id": 1})
-    if result is not None:
-        try:
-            note_id = result["notes"][note_name]
-            return note_id
-        except KeyError:
-            return None
-    else:
+    if result is None:
+        return None
+    try:
+        return result["notes"][note_name]
+    except KeyError:
         return None
 
 
@@ -35,8 +33,7 @@ async def all_notes():
     results = await collection.find_one({"_id": 1})
     try:
         notes_dic = results["notes"]
-        key_list = notes_dic.keys()
-        return key_list
+        return notes_dic.keys()
     except:
         return None
 
