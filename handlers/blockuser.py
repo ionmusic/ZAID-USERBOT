@@ -4,9 +4,9 @@ import time
 from pyrogram.types import ChatPermissions, Message
 from handlers.help import *
 
-@Client.on_message(filters.command("block", ["."]) & filters.me)  
+@Client.on_message(filters.command("block", ["."]) & filters.me)
 async def block_user(client: Client, message: Message):
-    if not message.chat.type == "private":
+    if message.chat.type != "private":
         await message.reply("Can't block the group LOL !")
     else:
         user_id=message.chat.id

@@ -14,10 +14,9 @@ async def adminlist(client: Client, message: Message):
     toolong = False
     if len(message.text.split()) >= 2:
         chat = message.text.split(None, 1)[1]
-        grup = await client.get_chat(chat)
     else:
         chat = message.chat.id
-        grup = await client.get_chat(chat)
+    grup = await client.get_chat(chat)
     if message.reply_to_message:
         replyid = message.reply_to_message.message_id
     alladmins = client.iter_chat_members(chat, filter="administrators")
@@ -26,7 +25,7 @@ async def adminlist(client: Client, message: Message):
     badmin = []
     async for a in alladmins:
         try:
-            nama = a.user.first_name + " " + a.user.last_name
+            nama = f"{a.user.first_name} {a.user.last_name}"
         except:
             nama = a.user.first_name
         if nama is None:
@@ -41,29 +40,28 @@ async def adminlist(client: Client, message: Message):
     admin.sort()
     badmin.sort()
     totaladmins = len(creator) + len(admin) + len(badmin)
-    teks = "**Admins in {}**\n".format(grup.title)
-    teks += "╒═══「 Creator 」\n"
+    teks = f"**Admins in {grup.title}**\n" + "╒═══「 Creator 」\n"
     for x in creator:
-        teks += "│ • {}\n".format(x)
+        teks += f"│ • {x}\n"
         if len(teks) >= 4096:
             await message.reply(message.chat.id, teks, reply_to_message_id=replyid)
             teks = ""
             toolong = True
-    teks += "╞══「 {} Human Administrator 」\n".format(len(admin))
+    teks += f"╞══「 {len(admin)} Human Administrator 」\n"
     for x in admin:
-        teks += "│ • {}\n".format(x)
+        teks += f"│ • {x}\n"
         if len(teks) >= 4096:
             await message.reply(message.chat.id, teks, reply_to_message_id=replyid)
             teks = ""
             toolong = True
-    teks += "╞══「 {} Bot Administrator 」\n".format(len(badmin))
+    teks += f"╞══「 {len(badmin)} Bot Administrator 」\n"
     for x in badmin:
-        teks += "│ • {}\n".format(x)
+        teks += f"│ • {x}\n"
         if len(teks) >= 4096:
             await message.reply(message.chat.id, teks, reply_to_message_id=replyid)
             teks = ""
             toolong = True
-    teks += "╘══「 Total {} Admins 」".format(totaladmins)
+    teks += f"╘══「 Total {totaladmins} Admins 」"
     if toolong:
         await message.reply(message.chat.id, teks, reply_to_message_id=replyid)
     else:
@@ -93,20 +91,19 @@ async def report_admin(client: Client, message: Message):
     alladmins = client.iter_chat_members(message.chat.id, filter="administrators")
     admin = []
     async for a in alladmins:
-        if a.status == "administrator" or a.status == "creator":
+        if a.status in ["administrator", "creator"]:
             if not a.user.is_bot:
                 admin.append(mention_html(a.user.id, "\u200b"))
     if message.reply_to_message:
-        if text:
-            teks = '{}'.format(text)
-        else:
-            teks = '{} reported to admins.'.format(
-                mention_html(message.reply_to_message.from_user.id, message.reply_to_message.from_user.first_name))
+        teks = (
+            f'{text}'
+            if text
+            else f'{mention_html(message.reply_to_message.from_user.id, message.reply_to_message.from_user.first_name)} reported to admins.'
+        )
+    elif text:
+        teks = f'{html.escape(text)}'
     else:
-        if text:
-            teks = '{}'.format(html.escape(text))
-        else:
-            teks = "Calling admins in {}.".format(grup.title)
+        teks = f"Calling admins in {grup.title}."
     teks += "".join(admin)
     if message.reply_to_message:
         await client.send_message(message.chat.id, teks, reply_to_message_id=message.reply_to_message.message_id,
@@ -138,28 +135,26 @@ async def get_list_bots(client: Client, message: Message):
     replyid = None
     if len(message.text.split()) >= 2:
         chat = message.text.split(None, 1)[1]
-        grup = await client.get_chat(chat)
     else:
         chat = message.chat.id
-        grup = await client.get_chat(chat)
+    grup = await client.get_chat(chat)
     if message.reply_to_message:
         replyid = message.reply_to_message.message_id
     getbots = client.iter_chat_members(chat)
     bots = []
     async for a in getbots:
         try:
-            nama = a.user.first_name + " " + a.user.last_name
+            nama = f"{a.user.first_name} {a.user.last_name}"
         except:
             nama = a.user.first_name
         if nama is None:
             nama = "☠️ Deleted account"
         if a.user.is_bot:
             bots.append(mention_markdown(a.user.id, nama))
-    teks = "**All bots in group {}**\n".format(grup.title)
-    teks += "╒═══「 Bots 」\n"
+    teks = f"**All bots in group {grup.title}**\n" + "╒═══「 Bots 」\n"
     for x in bots:
-        teks += "│ • {}\n".format(x)
-    teks += "╘══「 Total {} Bots 」".format(len(bots))
+        teks += f"│ • {x}\n"
+    teks += f"╘══「 Total {len(bots)} Bots 」"
     if replyid:
         await client.send_message(message.chat.id, teks, reply_to_message_id=replyid)
     else:

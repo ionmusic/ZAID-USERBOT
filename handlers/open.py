@@ -32,10 +32,8 @@ async def open_file(client: Client, m: Message):
     xd = await edit_or_reply(m, "`Reading File!`")
     f = await _.download_media(m.reply_to_message)
     if f:
-        # do
-        _error = open(f, "r")
-        _error_ = _error.read()
-        _error.close()
+        with open(f, "r") as _error:
+            _error_ = _error.read()
         if len(_error_) >= 4096:
             await xd.edit("`Output is too large pasting to Spacebin!`")
             ext = "py"

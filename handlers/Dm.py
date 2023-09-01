@@ -11,7 +11,7 @@ async def dm(client: Client, message: Message):
     inp = message.text.split(None, 2)[1]
     user = await client.get_chat(inp)
     spam_text = ' '.join(message.command[2:])
-    quantity = int(quantity)
+    quantity = quantity
 
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.message_id
@@ -34,7 +34,7 @@ async def dmm(client: Client, message: Message):
     inp = message.text.split(None, 2)[1]
     user = await client.get_chat(inp)
     spam_text = ' '.join(message.command[2:])
-    quantity = int(quantity)
+    quantity = quantity
 
     if message.reply_to_message:
         reply_to_id = message.reply_to_message.message_id

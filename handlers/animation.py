@@ -218,15 +218,15 @@ async def gajjajay(client: Client, message: Message):
 
 @Client.on_message(filters.command("charging", ["."]) & filters.me)
 async def timer_blankx(client: Client, message: Message):
- txt=message.text[10:] + '\n\n`Tesla Wireless Charging (beta) Started...\nDevice Detected: Nokia 1100\nBattery Percentage:` '
- j=10
- k=j
- for j in range(j):
-  await message.edit(txt + str(k))
-  k=k+10
-  await asyncio.sleep(1)
- await asyncio.sleep(1) 
- await message.edit("`Tesla Wireless Charging (beta) Completed...\nDevice Detected: Nokia 1100 (Space Grey Varient)\nBattery Percentage:` [100%](https://telegra.ph/file/a45aa7450c8eefed599d9.mp4) ", link_preview=True)
+    txt=message.text[10:] + '\n\n`Tesla Wireless Charging (beta) Started...\nDevice Detected: Nokia 1100\nBattery Percentage:` '
+    j=10
+    k=j
+    for _ in range(k):
+        await message.edit(txt + str(k))
+        k += 10
+        await asyncio.sleep(1)
+    await asyncio.sleep(1)
+    await message.edit("`Tesla Wireless Charging (beta) Completed...\nDevice Detected: Nokia 1100 (Space Grey Varient)\nBattery Percentage:` [100%](https://telegra.ph/file/a45aa7450c8eefed599d9.mp4) ", link_preview=True)
 
 
 

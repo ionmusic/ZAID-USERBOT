@@ -20,9 +20,10 @@ async def module_help(client: Client, message: Message):
     elif message.reply_to_message and len(cmd) == 1:
         help_arg = message.reply_to_message.text
     elif not message.reply_to_message and len(cmd) == 1:
-        all_commands = ""
-        all_commands += "Please specify which module you want help for!! \nUsage: `.help [module_name]`\n\n"
-
+        all_commands = (
+            ""
+            + "Please specify which module you want help for!! \nUsage: `.help [module_name]`\n\n"
+        )
         ac = PrettyTable()
         ac.header = False
         ac.title = "**ZAID USERBOT MODULES!**"
@@ -62,11 +63,7 @@ def add_command_help(module_name, commands):
     # Key will be group name
     # values will be dict of dicts of key command and value description
 
-    if module_name in CMD_HELP.keys():
-        command_dict = CMD_HELP[module_name]
-    else:
-        command_dict = {}
-
+    command_dict = CMD_HELP[module_name] if module_name in CMD_HELP.keys() else {}
     for x in commands:
         for y in x:
             if y is not x:

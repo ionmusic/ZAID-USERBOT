@@ -47,7 +47,6 @@ async def take_screen_shot(video_file: str, duration: int, path: str = '') -> Op
 async def google_rs(client: Client, message: Message):
     start = datetime.now()
     dis_loc = ''
-    base_url = "http://www.google.com"
     out_str = "`Reply to an image`"
     if message.reply_to_message:
         message_ = message.reply_to_message
@@ -70,8 +69,9 @@ async def google_rs(client: Client, message: Message):
                 await message.delete()
                 return
             dis_loc = img_file
+        base_url = "http://www.google.com"
         if dis_loc:
-            search_url = "{}/searchbyimage/upload".format(base_url)
+            search_url = f"{base_url}/searchbyimage/upload"
             multipart = {
                 "encoded_image": (dis_loc, open(dis_loc, "rb")),
                 "image_content": ""
@@ -126,9 +126,12 @@ async def tracemoe_rs(client: Client, message: Message):
                 return
             dis_loc = img_file
         if message_.video:
-            nama = "video_{}-{}.mp4".format(message.reply_to_message.video.date, message.reply_to_message.video.file_size)
-            await client.download_media(message.reply_to_message.video, file_name="nana/downloads/" + nama)
-            dis_loc = "handlers/cache/" + nama
+            nama = f"video_{message.reply_to_message.video.date}-{message.reply_to_message.video.file_size}.mp4"
+            await client.download_media(
+                message.reply_to_message.video,
+                file_name=f"nana/downloads/{nama}",
+            )
+            dis_loc = f"handlers/cache/{nama}"
             img_file = os.path.join(screen_shot, "grs.jpg")
             await take_screen_shot(dis_loc, 0, img_file)
             if not os.path.lexists(img_file):
@@ -141,10 +144,9 @@ async def tracemoe_rs(client: Client, message: Message):
             if message_.video:
                 search = await tracemoe.search(img_file, encode=True)
                 os.remove(img_file)
-                os.remove(dis_loc)
             else:
                 search = await tracemoe.search(dis_loc, encode=True)
-                os.remove(dis_loc)
+            os.remove(dis_loc)
             result = search['docs'][0]
             msg = f"**Title**: {result['title_english']}" \
                   f"\n**Similarity**: {str(result['similarity'])[1:2]}" \

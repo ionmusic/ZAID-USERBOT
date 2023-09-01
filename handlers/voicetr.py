@@ -77,7 +77,7 @@ async def voicelang(client: Client, message: Message):
         await message.edit("Wrong Language id !")
         lang = temp
         return
-    await message.edit("Language Set to {}".format(lang))
+    await message.edit(f"Language Set to {lang}")
 
 
 add_command_help(

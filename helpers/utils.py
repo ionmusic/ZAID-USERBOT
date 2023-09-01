@@ -155,18 +155,13 @@ def get_note_type(msg):
 def get_welcome_type(msg):
     data_type = None
     content = None
-    reply = msg.reply_to_message
-    if reply:
+    if reply := msg.reply_to_message:
         if reply.text:
             text = reply.text.markdown
         elif reply.caption:
             text = reply.caption.markdown
         else:
             text = None
-    else:
-        text = msg.text.split(None, 1)
-
-    if reply:
         if reply.text:
             text = reply.text.markdown
             data_type = Types.TEXT
@@ -217,13 +212,9 @@ def get_welcome_type(msg):
             # text = None
             data_type = Types.ANIMATION
 
-    # TODO
-    # elif reply.animated_sticker:
-    # 	content = reply.animation.file_id
-    # 	text = None
-    # 	data_type = Types.ANIMATED_STICKER
-
     else:
+        text = msg.text.split(None, 1)
+
         if msg.caption:
             text = msg.caption.split(None, 1)
             if len(text) >= 2:

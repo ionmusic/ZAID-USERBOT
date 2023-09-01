@@ -18,7 +18,7 @@ async def convert_vid_to_vidnote(input_vid: str, final_path: str):
             height = track.height
             width = track.width
     if aspect_ratio != 1:
-        crop_by = width if (height > width) else height
+        crop_by = min(height, width)
         await run_cmd(
             f'ffmpeg -i {input_vid} -vf "crop={crop_by}:{crop_by}" {final_path}'
         )
@@ -52,7 +52,7 @@ async def pijtkiau(client: Client, message: Message):
     c_time = time.time()
     file_ = await message.reply_to_message.download()
     file_name = (message.reply_to_message.video.file_name).split(".")[0]
-    srt_file_name = str(file_name) + ".srt"
+    srt_file_name = f"{str(file_name)}.srt"
     cmd_to_un = f"ffmpeg -i {file_} {srt_file_name}"
     await run_cmd(cmd_to_un)
     if not os.path.exists(srt_file_name):

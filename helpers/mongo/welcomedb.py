@@ -17,13 +17,11 @@ async def save_welcome(chat_id, msg_id):
 
 async def get_welcome(chat_id):
     result = await collection.find_one({"_id": 1})
-    if result is not None:
-        try:
-            msg_id = result["welcomes"][chat_id]
-            return msg_id
-        except KeyError:
-            return None
-    else:
+    if result is None:
+        return None
+    try:
+        return result["welcomes"][chat_id]
+    except KeyError:
         return None
 
 
